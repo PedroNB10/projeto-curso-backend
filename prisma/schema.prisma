@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id       Int        @id @default(autoincrement())
+  email    String     @unique @db.VarChar(45)
+  senha    String     @db.VarChar(45)
+  role     String
+  perfil   Perfil     @relation(fields: [perfilId], references: [id]) // Foreign Key, relacionamento 1 para 1
+  perfilId Int        @unique
+  postagem Postagem[] // Foreign Key, relacionamento 1 para muitos
+}
+
+model Perfil {
+  id         Int      @id @default(autoincrement())
+  nome       String   @unique @db.VarChar(45)
+  telefone   String   @unique @db.VarChar(45)
+  nascimento DateTime
+  bio        String?  @db.VarChar(45)
+  fotoPerfil String?
+  usuario    Usuario?
+}
+
+model Postagem {
+  id        Int         @id @default(autoincrement())
+  titulo    String      @db.VarChar(45)
+  conteudo  String      @db.VarChar(45)
+  usuario   Usuario     @relation(fields: [usuarioId], references: [id]) // Foreign Key, relacionamento 1 para 1
+  usuarioId Int
+  categoria Categoria[]
+}
+
+model Categoria {
+  id       Int        @id @default(autoincrement())
+  nome     String     @unique @db.VarChar(100)
+  postagem Postagem[]
+}
