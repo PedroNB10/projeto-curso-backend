@@ -1,9 +1,15 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+import express from 'express';
 
-app.get('/hello', (req, res) =>{
-    res.send('Hello mundo');
+import helloRouter from './Routes/hello.routes.js';
+
+const app = express();
+const port = 4000;
+
+app.use('/', helloRouter);
+
+
+app.get('/sobre', (req, res) =>{
+    res.send('Rota sobre');
 })
 
 app.listen(port, () => {
