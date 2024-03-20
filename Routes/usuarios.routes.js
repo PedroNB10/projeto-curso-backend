@@ -10,13 +10,13 @@ const router = express.Router();
 
 router.post('/usuarios', usuarioController.criarUsuario);
 
-router.put('/usuarios', usuarioController.atualizarUsuario);
+router.put('/usuarios/:usuarioId', usuarioController.atualizarUsuario);
 
 router.delete('/usuarios/:usuarioId', usuarioController.deletarUsuario);
 
 router.get('/usuarios', usuarioController.getUsuarios);
 
-router.get('/usuario/:usuarioId', usuarioController.getUsuarioPorId);
+router.get('/usuarios/:usuarioId', usuarioController.getUsuarioPorId);
 
 
 

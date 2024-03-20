@@ -27,11 +27,77 @@ export const criarUsuario = async (req, res) => {
     })
 }
 
-export const atualizarUsuario = async (req, res) => {}
+export const atualizarUsuario = async (req, res) => {
+    const usuario = prisma.usuario.update({
+        where: {
+            id: parseInt(req.params.usuarioId)
 
-export const deletarUsuario = async (req, res) => {}
+        },
+        data: {
+            email: req.body.email,
+            perfil: {
+                update: {
+                    nome: req.body.nome,
+                    telefone: req.body.telefone,
+                    nascimento: new Date(req.body.nascimento),
+                    bio: req.body.bio,
+                }
+            }
+        }
+    })
 
-export const getUsuarios = async (req, res) => {}
+    res.json({
+        data: usuario,
+        msg: 'Usuário atualizados com sucesso'
+    })
+}
 
-export const getUsuarioPorId = async (req, res) => {}
 
+
+
+export const  getUsuarios = async (req, res) => {
+    const usuarios = await prisma.usuario.findMany({
+        include: {
+            perfil: true
+        }
+    })
+
+    res.json({
+        data: usuarios,
+        msg: 'Usuarios encontrados com sucesso'
+    })
+}
+
+
+
+export const getUsuarioPorId = async (req, res) => {
+    const usuario = await prisma.usuario.findUnique({
+        where: {
+            id: parseInt(req.params.usuarioId)
+        },
+        include: {
+            perfil: true
+        }
+    })
+
+    res.json({
+        data: usuario,
+        msg: 'Usuario encontrado com sucesso'
+    })
+}
+
+export const deletarUsuario = async (req, res) => {
+    const perfilDeletado = await prisma.perfil.deleteMany({  // no caso do delete() somente é possível fazer o delete do perfil por meio do id do perfil, para usar outros paâmetros é necessário usar o deleteMany()
+        where: {
+            usuario: {
+                id: parseInt(req.params.usuarioId)
+            }
+        }
+    })
+
+    res.json({
+   
+        msg: 'Perfil deletado com sucesso'
+    })
+
+}
