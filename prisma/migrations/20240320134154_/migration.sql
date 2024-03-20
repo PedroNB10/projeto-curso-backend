@@ -3,7 +3,7 @@ CREATE TABLE `Usuario` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `email` VARCHAR(45) NOT NULL,
     `senha` VARCHAR(45) NOT NULL,
-    `role` VARCHAR(191) NOT NULL,
+    `role` BOOLEAN NOT NULL,
     `perfilId` INTEGER NOT NULL,
 
     UNIQUE INDEX `Usuario_email_key`(`email`),
@@ -16,11 +16,10 @@ CREATE TABLE `Perfil` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `nome` VARCHAR(45) NOT NULL,
     `telefone` VARCHAR(45) NOT NULL,
-    `nascimento` DATETIME(3) NOT NULL,
+    `nascimento` VARCHAR(191) NOT NULL,
     `bio` VARCHAR(45) NULL,
     `fotoPerfil` VARCHAR(191) NULL,
 
-    UNIQUE INDEX `Perfil_nome_key`(`nome`),
     UNIQUE INDEX `Perfil_telefone_key`(`telefone`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

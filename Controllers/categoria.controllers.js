@@ -15,11 +15,9 @@ export const  getCategorias = async (req, res) => {
 }
 
 export const criarCategoria = async (req, res) => {
-    const nome = req.body.nome
-
     const categoria = await prisma.categoria.create({
         data: {
-            nome: nome
+            nome: req.body.nome
             
         }
     })
@@ -31,8 +29,6 @@ export const criarCategoria = async (req, res) => {
 }
 
 export const deletarCategoria = async (req, res) => {
-    const id = Number(req.params.id)
-
     const categoria = await prisma.categoria.delete({
         where: {
             id: parseInt(req.params.id) // é um parâmetro da rota, aparece na url

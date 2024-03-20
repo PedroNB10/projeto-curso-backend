@@ -17,7 +17,7 @@ model Usuario {
   id       Int        @id @default(autoincrement())
   email    String     @unique @db.VarChar(45)
   senha    String     @db.VarChar(45)
-  role     String
+  role     Boolean
   perfil   Perfil     @relation(fields: [perfilId], references: [id]) // Foreign Key, relacionamento 1 para 1
   perfilId Int        @unique
   postagem Postagem[] // Foreign Key, relacionamento 1 para muitos
@@ -25,7 +25,7 @@ model Usuario {
 
 model Perfil {
   id         Int      @id @default(autoincrement())
-  nome       String   @unique @db.VarChar(45)
+  nome       String   @db.VarChar(45)
   telefone   String   @unique @db.VarChar(45)
   nascimento DateTime
   bio        String?  @db.VarChar(45)
