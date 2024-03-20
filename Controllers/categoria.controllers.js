@@ -29,3 +29,17 @@ export const criarCategoria = async (req, res) => {
         msg: 'Categoria criada com sucesso'
     })
 }
+
+export const deletarCategoria = async (req, res) => {
+    const id = Number(req.params.id)
+
+    const categoria = await prisma.categoria.delete({
+        where: {
+            id: parseInt(req.params.id) // é um parâmetro da rota, aparece na url
+        }
+    })
+
+    res.json({
+        msg: 'Categoria deletada com sucesso'
+    })
+}
