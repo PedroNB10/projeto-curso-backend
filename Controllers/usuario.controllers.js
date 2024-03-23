@@ -31,6 +31,42 @@ export const criarUsuario = async (req, res) => {
     })
 }
 
+export const login = async (req, res) => {
+    const usuario = await prisma.usuario.findFirst({
+        // where: { Nesse padrão ele checa se o email ou a senha são iguais ao que está no banco, precisa usar o AND para checar se os dois são iguais
+        //     email: req.body.email,
+        //     senha: req.body.senha
+        // },
+        where: {
+            AND: {
+                email: req.body.email,
+                senha: req.body.senha
+            }
+        },
+
+        include: {
+            perfil: true
+        }
+    })
+
+    if (usuario == null) {
+        res.status(401).json({
+            msg: 'Email ou senha inválidos'
+        })
+        return
+    }
+
+
+    const token = gerarToken(usuario)
+
+    res.json({
+        data: usuario,
+        token: token,
+        msg: 'Login realizado com sucesso'
+    })
+}
+
+
 export const atualizarUsuario = async (req, res) => {
     const usuario = prisma.usuario.update({
         where: {

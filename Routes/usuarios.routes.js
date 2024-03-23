@@ -10,6 +10,8 @@ const router = express.Router();
 
 router.post('/', usuarioController.criarUsuario);
 
+router.post('/login', usuarioController.login);
+
 router.put('/:usuarioId', usuarioController.atualizarUsuario);
 
 router.delete('/:usuarioId', usuarioController.deletarUsuario);
