@@ -11,9 +11,9 @@ const port = 4000;
 app.use(express.json()); // middleware, padrão para trabalhar com json
 
 app.use('/', helloRouter);
-app.use('/', categoriasRouter);
-app.use('/', usarioRouter);
-app.use('/', postagensRouter); 
+app.use('/categorias', categoriasRouter);
+app.use('/usuarios', usarioRouter);
+app.use('/postagens', postagensRouter); 
 
 
 app.get('/sobre', (req, res) =>{

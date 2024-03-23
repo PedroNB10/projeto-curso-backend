@@ -8,15 +8,15 @@ const router = express.Router();
 // CRUD
 // Criação, atualização, remoção, retornar todos os usuários, retornar um usuário
 
-router.post('/usuarios', usuarioController.criarUsuario);
+router.post('/', usuarioController.criarUsuario);
 
-router.put('/usuarios/:usuarioId', usuarioController.atualizarUsuario);
+router.put('/:usuarioId', usuarioController.atualizarUsuario);
 
-router.delete('/usuarios/:usuarioId', usuarioController.deletarUsuario);
+router.delete('/:usuarioId', usuarioController.deletarUsuario);
 
-router.get('/usuarios', usuarioController.getUsuarios);
+router.get('/', usuarioController.getUsuarios);
 
-router.get('/usuarios/:usuarioId', usuarioController.getUsuarioPorId);
+router.get('/:usuarioId', usuarioController.getUsuarioPorId);
 
 
 

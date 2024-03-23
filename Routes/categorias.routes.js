@@ -4,8 +4,8 @@ import * as CategoriasController from '../Controllers/categoria.controllers.js';
 
 const router = express.Router();
 
-router.get('/categorias', CategoriasController.getCategorias);
-router.post('/categorias', CategoriasController.criarCategoria);
-router.delete('/categorias/:id', CategoriasController.deletarCategoria);
+router.get('/', CategoriasController.getCategorias);
+router.post('/', CategoriasController.criarCategoria);
+router.delete('/:id', CategoriasController.deletarCategoria);
 
 export default router;
