@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { gerarToken } from "../Utils/jwt.js";
 
 const prisma = new PrismaClient();
 
@@ -21,8 +22,11 @@ export const criarUsuario = async (req, res) => {
         }
     })
 
+    const token = gerarToken(usuario)
+
     res.json({
         data: usuario,
+        token: token,
         msg: 'Usuário criado com sucesso'
     })
 }
