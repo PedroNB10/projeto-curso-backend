@@ -57,6 +57,19 @@ export const atualizarUsuario = async (req, res) => {
 
 export const  getUsuarios = async (req, res) => {
     const usuarios = await prisma.usuario.findMany({
+        where: {
+            perfil: {
+                nome: {
+                    contains: req.query.nome  // se tiver um nome na query, ele vai filtrar os usuários que contém esse nome, senão ele vai trazer todos os usuários
+                
+                },
+                telefone:{
+                    contains: req.query.telefone
+                
+                }
+            }
+        },
+
         include: {
             perfil: true
         }
