@@ -27,7 +27,7 @@ model Perfil {
   id         Int      @id @default(autoincrement())
   nome       String   @db.VarChar(45)
   telefone   String   @unique @db.VarChar(45)
-  nascimento DateTime
+  nascimento String   @db.VarChar(45)
   bio        String?  @db.VarChar(45)
   fotoPerfil String?
   usuario    Usuario?

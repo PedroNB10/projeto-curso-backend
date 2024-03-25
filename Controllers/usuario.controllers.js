@@ -1,22 +1,46 @@
 import { PrismaClient } from "@prisma/client";
 import { gerarToken } from "../Utils/jwt.js";
 
+
 const prisma = new PrismaClient();
 
 
+export const uploadAvatar = async (req, res) => {
+console.log(req.params.usuarioId)
+console.log("chamou")
+    console.log(req.file);
+    const fotoPerfil = await prisma.perfil.update({
+        where: {
+            id: parseInt(req.params.usuarioId)
+        },
+        data: {
+            fotoPerfil: req.file.path 
+        }
+    })
+
+    res.json({
+        data: fotoPerfil,
+        msg: 'Foto de perfil atualizada com sucesso'
+    })
+}
+
+
 export const criarUsuario = async (req, res) => {
+
+    const role = req.body.role == 'true' ? true : false // se o role for true, ele vai ser um admin, se não, ele vai ser um usuário comum
     console.log(req.body);
     const usuario = await prisma.usuario.create({
         data: {
             email: req.body.email,
             senha: req.body.senha,
-            role: req.body.role,
+            role: role,
             perfil: { // perfil é uma relação 1 para 1, por isso é um objeto que também é um modelo dentro do modelo de usuário
                 create: {
                     nome: req.body.nome,
                     telefone: req.body.telefone,
-                    nascimento: new Date(req.body.nascimento).toISOString(),
+                    nascimento: req.body.nascimento,
                     bio: req.body.bio,
+                    fotoPerfil: req.file ? req.file.filename : 'default.jpg' // se tiver um arquivo, ele vai salvar o nome do arquivo, se não, ele vai salvar o nome default.jpg
                 }
             }
         }
