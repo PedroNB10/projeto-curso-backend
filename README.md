@@ -66,13 +66,13 @@ npx prisma studio
 
 ### Comandos do prisma:
 
-**Toda vez que você fizer uma alteração do `schema.prisma` mas você não tem tanta certeza se a modelagem do banco esteja correta e você prefere testar use o comando abaixo, ele apenas modifica o projeto de forma que você consiga testar sem ter criado a migration:**
+**Toda vez que você fizer uma alteração do `schema.prisma` mas você não tem tanta certeza se a modelagem do banco está correta,você pode testar usando o comando abaixo, ele apenas modifica o projeto de forma que você consiga testá-lo sem ter criado a migration:**
 
 ```
 npx prisma db push
 ```
 
-**Assim que fazer alguma alteração do `schema.prisma` é recomendado a criação de uma migration para que o histórico da modelagem do seu banco de dados esteja guardado:**
+**Assim que fizer alguma alteração do `schema.prisma` é recomendado a criação de uma migration para que o histórico da modelagem do seu banco de dados esteja guardado:**
 
 ```
 npx prisma migrate dev
