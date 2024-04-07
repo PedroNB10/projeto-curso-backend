@@ -37,6 +37,10 @@ Content-Type: application/json
   "bio": "Lorem ipsum dolor"
 }
 
+#### PUT /usuarios
+
+PUT http://localhost:4000/usuarios/upload/:usuarioId
+
 
 #### POST /usuarios/login
 POST http://localhost:4000/usuarios/login
@@ -81,19 +85,23 @@ Content-Type: application/json
 {
   "titulo": "Título da Postagem",
   "conteudo": "Conteúdo da postagem...",
-  "usuarioId": "789012",
-  "categoriasIds": ["2"]
+  "usuarioId": 12,
+  "categoriasIds": [
+    { "id": 2 }
+  ]
 }
 
 #### PUT /postagens/:postagemId
-PUT http://localhost:4000/postagens/123456
+PUT http://localhost:4000/postagens/1
 Content-Type: application/json
 
 {
   "titulo": "Novo Título da Postagem",
   "conteudo": "Novo conteúdo da postagem...",
-  "categoriasIds": ["567890", "123456"]
+  "categoriasIds": [
+    { "id": 2 }
+  ]
 }
 
 #### DELETE /postagens/:postagemId
-DELETE http://localhost:4000/postagens/123456
+DELETE http://localhost:4000/postagens/3
