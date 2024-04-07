@@ -1,0 +1,99 @@
+### Rota `/categorias`
+
+#### GET /categorias
+GET http://localhost:4000/categorias
+
+#### POST /categorias
+POST http://localhost:4000/categorias
+Content-Type: application/json
+
+{
+  "nome": "Nova Categoria 4"
+}
+
+#### DELETE /categorias/:id
+DELETE http://localhost:4000/categorias/6
+
+
+### Rota `/usuarios`
+
+#### GET /usuarios
+GET http://localhost:4000/usuarios?nome=Exemplo&telefone=12345
+
+#### GET /usuarios/:usuarioId
+GET http://localhost:4000/usuarios/8888
+
+#### POST /usuarios
+POST http://localhost:4000/usuarios
+Content-Type: application/json
+
+{
+  "email": "exemplo@dominio.com",
+  "senha": "senha123",
+  "nome": "Nome Exemplo",
+  "role": true,
+  "telefone": "55123456",
+  "nascimento": "1990-01-01",
+  "bio": "Lorem ipsum dolor"
+}
+
+
+#### POST /usuarios/login
+POST http://localhost:4000/usuarios/login
+Content-Type: application/json
+
+{
+  "email": "exemplo@dominio.com",
+  "senha": "senha123"
+}
+
+#### PUT /usuarios/:usuarioId
+PUT http://localhost:4000/usuarios/11
+Content-Type: application/json
+
+{
+  "email": "novoemail@dominio.com",
+  "nome": "Novo Nome",
+  "telefone": "+55987654321",
+ "nascimento": "1990-01-01",
+  "bio": "Novo texto da biografia."
+}
+
+#### DELETE /usuarios/:usuarioId
+DELETE http://localhost:4000/usuarios/11
+
+
+### Rota `/postagens`
+
+#### GET /postagens
+GET http://localhost:4000/postagens
+
+#### GET /postagens
+GET http://localhost:4000/postagens
+
+#### GET /postagens/:postagemId
+GET http://localhost:4000/postagens/1
+
+#### POST /postagens
+POST http://localhost:4000/postagens
+Content-Type: application/json
+
+{
+  "titulo": "Título da Postagem",
+  "conteudo": "Conteúdo da postagem...",
+  "usuarioId": "789012",
+  "categoriasIds": ["2"]
+}
+
+#### PUT /postagens/:postagemId
+PUT http://localhost:4000/postagens/123456
+Content-Type: application/json
+
+{
+  "titulo": "Novo Título da Postagem",
+  "conteudo": "Novo conteúdo da postagem...",
+  "categoriasIds": ["567890", "123456"]
+}
+
+#### DELETE /postagens/:postagemId
+DELETE http://localhost:4000/postagens/123456

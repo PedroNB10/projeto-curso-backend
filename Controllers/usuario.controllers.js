@@ -29,6 +29,20 @@ export const criarUsuario = async (req, res) => {
 
     const role = req.body.role == 'true' ? true : false // se o role for true, ele vai ser um admin, se não, ele vai ser um usuário comum
     console.log(req.body);
+
+    const verificarEmail = await prisma.usuario.findFirst({
+        where: {
+            email: req.body.email
+        }
+    })
+
+    if (verificarEmail != null) {
+        res.status(400).json({
+            msg: 'Não é possível cadastrar um usuário com o mesmo email'
+        })
+        return
+    }
+
     const usuario = await prisma.usuario.create({
         data: {
             email: req.body.email,
@@ -92,7 +106,21 @@ export const login = async (req, res) => {
 
 
 export const atualizarUsuario = async (req, res) => {
-    const usuario = prisma.usuario.update({
+
+    const verificarSeUsuarioExiste = await prisma.usuario.findUnique({
+        where: {
+            id: parseInt(req.params.usuarioId)
+        }
+    })
+
+    if (verificarSeUsuarioExiste == null) {
+        res.status(404).json({
+            msg: 'Usuário não encontrado'
+        })
+        return
+    }
+
+    const usuario = await prisma.usuario.update({
         where: {
             id: parseInt(req.params.usuarioId)
 
@@ -103,12 +131,19 @@ export const atualizarUsuario = async (req, res) => {
                 update: {
                     nome: req.body.nome,
                     telefone: req.body.telefone,
-                    nascimento: new Date(req.body.nascimento),
+                    nascimento: req.body.nascimento,
                     bio: req.body.bio,
                 }
             }
         }
     })
+
+    if (usuario == null) {
+        res.status(404).json({
+            msg: 'Usuário não encontrado, não foi possível atualizar o usuário'
+        })
+        return
+    }
 
     res.json({
         data: usuario,
@@ -139,6 +174,14 @@ export const  getUsuarios = async (req, res) => {
         }
     })
 
+    if (usuarios == null) {
+        res.status(404).json({
+            msg: 'Usuários não encontrados'
+        })
+        return
+    }
+
+
     res.json({
         data: usuarios,
         msg: 'Usuarios encontrados com sucesso'
@@ -156,6 +199,13 @@ export const getUsuarioPorId = async (req, res) => {
             perfil: true
         }
     })
+
+    if (usuario == null) {
+        res.status(404).json({
+            msg: 'Usuário não encontrado'
+        })
+        return
+    }
 
     res.json({
         data: usuario,
