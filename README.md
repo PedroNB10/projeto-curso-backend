@@ -64,6 +64,12 @@ npx prisma studio
 
 ## Colinha dos principais comandos vistos na capacitação
 
+### Formato json das requisições
+
+**A maioria das requisições do projeto você irá encontrar em um arquivo chamado `api.http`, ele está localizado na raiz do projeto onde o package.json também se encontra. lá você consegue executar quase todas as requisições sem precisar escrever uma a uma em um software como o Postman.**
+
+<img src="./Screenshot from 2024-04-07 21-41-39.png">
+
 ### Comandos do prisma:
 
 **Toda vez que você fizer uma alteração do `schema.prisma` mas você não tem tanta certeza se a modelagem do banco está correta,você pode testar usando o comando abaixo, ele apenas modifica o projeto de forma que você consiga testá-lo sem ter criado a migration:**
