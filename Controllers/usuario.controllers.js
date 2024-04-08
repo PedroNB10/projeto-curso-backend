@@ -33,8 +33,24 @@ export const criarUsuario = async (req, res) => {
     const verificarEmail = await prisma.usuario.findFirst({
         where: {
             email: req.body.email
+        },
+        include: {
+            perfil: true
         }
     })
+
+    const checkarPerfilTelefone = await prisma.perfil.findFirst({
+        where: {
+            telefone: req.body.telefone
+        }
+    })
+    
+    if (checkarPerfilTelefone != null) {
+        res.status(400).json({
+            msg: 'Não é possível cadastrar um usuário com o mesmo telefone'
+        })
+        return
+    }
 
     if (verificarEmail != null) {
         res.status(400).json({

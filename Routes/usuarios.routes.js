@@ -21,7 +21,7 @@ const upload = multer({storage: storage});
 // CRUD
 // Criação, atualização, remoção, retornar todos os usuários, retornar um usuário
 
-router.post('/', usuarioController.criarUsuario);
+router.post('/', upload.single('fotoPerfil'),usuarioController.criarUsuario);
 
 router.put('/upload/:usuarioId', upload.single('fotoPerfil'), usuarioController.uploadAvatar);
 

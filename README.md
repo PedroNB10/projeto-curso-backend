@@ -78,6 +78,12 @@ npx prisma db push
 npx prisma migrate dev
 ```
 
+### Observação para fazer o Upload de fotos:
+
+Para você adicionar uma foto de perfil ao usuário na sua criação, é preciso usar um formato diferente do json para submeter o arquivo. Dessa forma na execução desse projeto a solulção mais viável que encontrei foi usar o Insomnia ao invés do Postman, por algum motivo o Postman identifica um problema no Header da requisição, já o Insomnia não. Para seguir, configure o Insomnia para enviar o formato `Multipart Form` e complete os campos colocando a chave e o valor, no caso da imagem você precisa colocar a chave e o tipo File:
+
+<img src="./Screenshot from 2024-04-07 21-11-29.png">
+
 ### Comandos MySQL:
 
 **Selecionar o banco de dados:**
